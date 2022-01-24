@@ -32,7 +32,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 
 install_requirements = [
-    'mozilla-django-oidc~=1.2',
+    'mozilla-django-oidc~=2.0',
 ]
 
 test_requirements = [
@@ -45,17 +45,17 @@ extra_requirements = {
 }
 
 setup(
-    name='datapunt-keycloak-oidc',
-    version='0.5.1',
+    name='cividi-keycloak-oidc',
+    version='0.5.2',
     license='Mozilla Public License 2.0',
 
-    author='Datapunt Amsterdam',
-    author_email='datapunt@amsterdam.nl',
+    author='cividi',
+    author_email='support@cividi.ch',
 
     description='A simple Django app to use keycloak over OIDC',
     long_description=README,
     long_description_content_type="text/markdown",
-    url='https://github.com/Amsterdam/keycloak_oidc',
+    url='https://github.com/cividi/keycloak_oidc',
 
     packages=find_packages(),
     install_requires=install_requirements,
@@ -68,7 +68,7 @@ setup(
     classifiers=[
         'Environment :: Web Environment',
         'Framework :: Django',
-        'Framework :: Django :: 2.2',
+        'Framework :: Django :: 3',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)',
         'Operating System :: OS Independent',
