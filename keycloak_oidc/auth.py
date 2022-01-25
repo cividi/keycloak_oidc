@@ -10,6 +10,10 @@ class OIDCAuthenticationBackend(auth.OIDCAuthenticationBackend):
 
         user.first_name = claims.get('given_name', '')
         user.last_name = claims.get('family_name', '')
+        user.wagtail_userprofile.preferred_language = claims.get('locale', 'en')
+        if "Administrators" in claims.get('roles'):
+            user.is_superuser = True
+            user.is_staff = True
         user.save()
 
         self.update_groups(user, claims)
@@ -19,6 +23,10 @@ class OIDCAuthenticationBackend(auth.OIDCAuthenticationBackend):
     def update_user(self, user, claims):
         user.first_name = claims.get('given_name', '')
         user.last_name = claims.get('family_name', '')
+        user.wagtail_userprofile.preferred_language = claims.get('locale', 'en')
+        if "Administrators" in claims.get('roles'):
+            user.is_superuser = True
+            user.is_staff = True
         user.save()
         self.update_groups(user, claims)
 
