@@ -10,9 +10,12 @@ class OIDCAuthenticationBackend(auth.OIDCAuthenticationBackend):
 
         user.first_name = claims.get('given_name', '')
         user.last_name = claims.get('family_name', '')
+        # Set approved types of groups as staff users and hence allow backend access
+        if len([group for group in claims.get('roles') if group in ["Administrator","Editor","Moderator","Contributor"]]) > 0:
+            user.is_staff = True
+        # Check if user is admin and hence should get superuser rights
         if "Administrators" in claims.get('roles'):
             user.is_superuser = True
-            user.is_staff = True
         user.save()
 
         self.update_groups(user, claims)
@@ -22,9 +25,12 @@ class OIDCAuthenticationBackend(auth.OIDCAuthenticationBackend):
     def update_user(self, user, claims):
         user.first_name = claims.get('given_name', '')
         user.last_name = claims.get('family_name', '')
+        # Set approved types of groups as staff users and hence allow backend access
+        if len([group for group in claims.get('roles') if group in ["Administrator","Editor","Moderator","Contributor"]]) > 0:
+            user.is_staff = True
+        # Check if user is admin and hence should get superuser rights
         if "Administrators" in claims.get('roles'):
             user.is_superuser = True
-            user.is_staff = True
         user.save()
         self.update_groups(user, claims)
 
